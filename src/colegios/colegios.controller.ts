@@ -4,6 +4,7 @@ import { CreateColegioDto } from './dto/create-colegio.dto';
 import { UpdateColegioDto } from './dto/update-colegio.dto';
 import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('colegios')
 export class ColegiosController {
   constructor(private readonly colegiosService: ColegiosService) {}
@@ -12,8 +13,6 @@ export class ColegiosController {
   create(@Body() createColegioDto: CreateColegioDto) {
     return this.colegiosService.create(createColegioDto);
   }
-  @UseGuards(AuthGuard('jwt'))
-
 
   @Get()
   findAll() {
